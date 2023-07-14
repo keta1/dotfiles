@@ -1,0 +1,10 @@
+# ignore everything and use ! to allow tracking
+*
+
+# ignore-list files, at top level and under any tracked directories
+!.gitignore
+
+# top level dirs
+!/.config/
+!/.local/
+!/.ssh/
