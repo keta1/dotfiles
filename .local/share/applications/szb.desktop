@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Game;
+Comment=阴影巴士
+Exec=docker start szb %u
+GenericName=
+Icon=cygames-szb
+Keywords=game;ccg;
+MimeType=
+Name=szb
+Path=
+SingleMainWindow=true
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-RunOnDiscreteGpu=false
+X-KDE-SubstituteUID=false
+X-KDE-Username=
