@@ -21,6 +21,10 @@
       ANDROID_AVD_HOME = "${config.xdg.dataHome}/android/avd";
       ANDROID_EMULATOR_HOME = "${config.xdg.configHome}/android/emulator";
       ANDROID_USER_HOME = "${config.xdg.configHome}/android";
+      BUNDLE_USER_CACHE = "${config.xdg.cacheHome}/bundle";
+      BUNDLE_USER_CONFIG = "${config.xdg.configHome}/bundle/config";
+      BUNDLE_USER_HOME = "${config.xdg.dataHome}/bundle";
+      BUNDLE_USER_PLUGIN = "${config.xdg.dataHome}/bundle/plugin";
       CODEX_HOME = "${config.xdg.configHome}/codex";
       SHELL_SESSIONS_DISABLE = "1";
     };
@@ -49,7 +53,10 @@
     shellInit = builtins.readFile ../../../fish/config.fish;
   };
 
-  programs.gpg.enable = true;
+  programs.gpg = {
+    enable = true;
+    homedir = "${config.xdg.dataHome}/gnupg";
+  };
 
   programs.home-manager.enable = true;
 
