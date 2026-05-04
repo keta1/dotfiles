@@ -45,6 +45,11 @@ in
       && [ "$(readlink "${configHome}/atuin/config.toml")" = "${dotfilesDir}/atuin/config.toml" ]; then
       $DRY_RUN_CMD rm -f "${configHome}/atuin/config.toml"
     fi
+
+    if [ -L "${homeDirectory}/.codex/config.toml" ] \
+      && [ "$(readlink "${homeDirectory}/.codex/config.toml")" = "${dotfilesDir}/codex/config.toml" ]; then
+      $DRY_RUN_CMD rm -f "${homeDirectory}/.codex/config.toml"
+    fi
   '';
 
   home.activation.migrateAndroidHome = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -105,6 +110,12 @@ in
     if [ -L "${homeDirectory}/.gitignore_global" ] \
       && [ "$(readlink "${homeDirectory}/.gitignore_global")" = "${dotfilesDir}/git/ignore" ]; then
       $DRY_RUN_CMD rm -f "${homeDirectory}/.gitignore_global"
+    fi
+
+    # Codex CLI. Config is local-only; auth, sessions, logs, and caches stay unmanaged.
+    if [ -e "${dotfilesDir}/codex/config.toml" ]; then
+      $DRY_RUN_CMD mkdir -p "${configHome}/codex"
+      link_force "${dotfilesDir}/codex/config.toml" "${configHome}/codex/config.toml"
     fi
 
     # SSH config only. Keys stay unmanaged and untracked.

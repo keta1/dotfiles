@@ -21,6 +21,7 @@
       ANDROID_AVD_HOME = "${config.xdg.dataHome}/android/avd";
       ANDROID_EMULATOR_HOME = "${config.xdg.configHome}/android/emulator";
       ANDROID_USER_HOME = "${config.xdg.configHome}/android";
+      CODEX_HOME = "${config.xdg.configHome}/codex";
       SHELL_SESSIONS_DISABLE = "1";
     };
   };

@@ -20,6 +20,7 @@ in
 
         # Dev stuff
         android-tools
+        codex
         gh
         git
         jq
