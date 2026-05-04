@@ -1,0 +1,13 @@
+# Keep private hosts, identities, and machine-specific options outside this repo.
+Include ~/.ssh/config.d/*.conf
+Include ~/.ssh/config.local
+
+# Put shared, non-secret Host blocks below.
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+  User git
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes

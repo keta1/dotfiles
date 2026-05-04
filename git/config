@@ -1,0 +1,15 @@
+[include]
+	path = ~/.gitconfig.local
+
+[user]
+    name = ketal
+    email = k@ketal.icu
+
+[init]
+	defaultBranch = main
+
+[core]
+	autocrlf = input
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/

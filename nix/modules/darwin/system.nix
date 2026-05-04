@@ -1,0 +1,33 @@
+{
+  self,
+  pkgs,
+  username,
+  homedir,
+  darwinSystem,
+  ...
+}:
+{
+  nix.settings.extra-experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    hostPlatform = darwinSystem;
+  };
+
+  programs.fish = {
+    enable = true;
+    useBabelfish = true;
+  };
+
+  environment.shells = [ pkgs.fish ];
+
+  system = {
+    primaryUser = username;
+    configurationRevision = self.rev or self.dirtyRev or null;
+    stateVersion = 6;
+  };
+
+  users.users.${username}.home = homedir;
+}

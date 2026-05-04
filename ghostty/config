@@ -1,0 +1,25 @@
+# Font
+font-size = 13
+
+# Theme
+window-theme = auto
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-decoration = auto
+macos-titlebar-style = transparent
+macos-option-as-alt = left
+
+# Shell/session behavior
+command = /run/current-system/sw/bin/fish
+shell-integration = fish
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# Interaction
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+confirm-close-surface = false
