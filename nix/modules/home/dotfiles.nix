@@ -113,5 +113,8 @@ in
     $DRY_RUN_CMD chmod 700 "${homeDirectory}/.ssh"
     $DRY_RUN_CMD chmod 700 "${homeDirectory}/.ssh/config.d"
     link_force "${dotfilesDir}/ssh/config" "${homeDirectory}/.ssh/config"
+    if [ -e "${dotfilesDir}/ssh/config.local" ]; then
+      link_force "${dotfilesDir}/ssh/config.local" "${homeDirectory}/.ssh/config.local"
+    fi
   '';
 }
