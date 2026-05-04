@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   username,
   homedir,
   ...
@@ -47,11 +48,18 @@
     shellInit = builtins.readFile ../../../fish/config.fish;
   };
 
+  programs.gpg.enable = true;
+
   programs.home-manager.enable = true;
 
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     history.path = "${config.xdg.stateHome}/zsh_history";
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    pinentry.package = pkgs.pinentry_mac;
   };
 }

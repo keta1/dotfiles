@@ -1,9 +1,7 @@
-[include]
-	path = ~/.gitconfig.local
-
 [user]
     name = ketal
     email = k@ketal.icu
+    signingkey = 52E91FA93DA527DA
 
 [init]
 	defaultBranch = main
@@ -11,5 +9,17 @@
 [core]
 	autocrlf = input
 
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgSign = true
+
+[gpg]
+	program = gpg
+
 [url "git@github.com:"]
     insteadOf = https://github.com/
+
+[include]
+	path = ~/.gitconfig.local
