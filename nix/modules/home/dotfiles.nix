@@ -29,6 +29,10 @@ let
       $DRY_RUN_CMD ln -sf "$src" "$dst"
     }
   '';
+
+  skipDarwinFishConf = lib.optionalString (!pkgs.stdenv.isDarwin) ''
+    [ "$(basename "$source")" != "00-homebrew.fish" ] || continue
+  '';
 in
 {
   home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -41,6 +45,7 @@ in
       for source in "${dotfilesDir}"/fish/conf.d/*.fish; do
         [ -e "$source" ] || continue
         [ "$(basename "$source")" != "20-atuin.fish" ] || continue
+        ${skipDarwinFishConf}
         link_force "$source" "${configHome}/fish/conf.d/$(basename "$source")"
       done
     fi

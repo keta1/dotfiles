@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   username,
   homedir,
@@ -54,6 +55,7 @@
 
   services.gpg-agent = {
     enable = true;
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     pinentry.package = pkgs.pinentry_mac;
   };
 }
