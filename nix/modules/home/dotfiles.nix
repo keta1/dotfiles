@@ -31,53 +31,11 @@ let
   '';
 in
 {
-  home.activation.removeLegacyFishConfig = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
-    if [ -L "${configHome}/fish/config.fish" ] \
-      && [ "$(readlink "${configHome}/fish/config.fish")" = "${dotfilesDir}/fish/config.fish" ]; then
-      $DRY_RUN_CMD rm -f "${configHome}/fish/config.fish"
-    fi
-
-    if [ -L "${configHome}/fish/conf.d/20-atuin.fish" ]; then
-      $DRY_RUN_CMD rm -f "${configHome}/fish/conf.d/20-atuin.fish"
-    fi
-
-    if [ -L "${configHome}/atuin/config.toml" ] \
-      && [ "$(readlink "${configHome}/atuin/config.toml")" = "${dotfilesDir}/atuin/config.toml" ]; then
-      $DRY_RUN_CMD rm -f "${configHome}/atuin/config.toml"
-    fi
-
-    if [ -L "${homeDirectory}/.codex/config.toml" ] \
-      && [ "$(readlink "${homeDirectory}/.codex/config.toml")" = "${dotfilesDir}/codex/config.toml" ]; then
-      $DRY_RUN_CMD rm -f "${homeDirectory}/.codex/config.toml"
-    fi
-  '';
-
-  home.activation.migrateAndroidHome = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ -d "${homeDirectory}/.android" ]; then
-      $DRY_RUN_CMD mkdir -p "${config.xdg.configHome}/android" "${config.xdg.dataHome}/android"
-
-      if [ -e "${homeDirectory}/.android/analytics.settings" ] \
-        && [ ! -e "${config.xdg.configHome}/android/analytics.settings" ]; then
-        $DRY_RUN_CMD mv "${homeDirectory}/.android/analytics.settings" "${config.xdg.configHome}/android/analytics.settings"
-      fi
-
-      if [ -d "${homeDirectory}/.android/avd" ] \
-        && [ ! -e "${config.xdg.dataHome}/android/avd" ]; then
-        $DRY_RUN_CMD mv "${homeDirectory}/.android/avd" "${config.xdg.dataHome}/android/avd"
-      fi
-
-      $DRY_RUN_CMD rmdir "${homeDirectory}/.android" 2>/dev/null || true
-    fi
-  '';
-
   home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${mkLinkForce}
 
     # Fish
     $DRY_RUN_CMD mkdir -p "${configHome}/fish/conf.d"
-    if [ -L "${configHome}/fish/conf.d/00-hm-session-vars.fish" ]; then
-      $DRY_RUN_CMD rm -f "${configHome}/fish/conf.d/00-hm-session-vars.fish"
-    fi
 
     if [ -d "${dotfilesDir}/fish/conf.d" ]; then
       for source in "${dotfilesDir}"/fish/conf.d/*.fish; do
@@ -107,10 +65,6 @@ in
 
     # Git
     link_force "${dotfilesDir}/git/config" "${homeDirectory}/.gitconfig"
-    if [ -L "${homeDirectory}/.gitignore_global" ] \
-      && [ "$(readlink "${homeDirectory}/.gitignore_global")" = "${dotfilesDir}/git/ignore" ]; then
-      $DRY_RUN_CMD rm -f "${homeDirectory}/.gitignore_global"
-    fi
 
     # Codex CLI. Config is local-only; auth, sessions, logs, and caches stay unmanaged.
     if [ -e "${dotfilesDir}/codex/config.toml" ]; then
