@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   dotfilesDir,
   ...
 }:
@@ -9,55 +8,31 @@ let
   inherit (config.home) homeDirectory;
   inherit (config.xdg) configHome;
 
-  zoxideFishInit = pkgs.runCommand "zoxide-init.fish" { nativeBuildInputs = [ pkgs.zoxide ]; } ''
-    zoxide init fish > "$out"
-  '';
-
-  zoxideFishConf = pkgs.writeText "30-zoxide.fish" ''
-    if not status is-interactive
-        return
-    end
-
-    source ${zoxideFishInit}
-  '';
-
   mkLinkForce = ''
     link_force() {
       local src=$1
       local dst=$2
-      $DRY_RUN_CMD rm -f "$dst"
+      $DRY_RUN_CMD rm -rf "$dst"
       $DRY_RUN_CMD ln -sf "$src" "$dst"
     }
   '';
 in
 {
-  home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.linkFishDotfiles =
+    lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ]
+      ''
+        ${mkLinkForce}
+
+        # Fish
+        $DRY_RUN_CMD mkdir -p "${dotfilesDir}/fish/conf.d"
+        if [ -e "${configHome}/fish/fish_variables" ] && [ ! -e "${dotfilesDir}/fish/fish_variables" ]; then
+          $DRY_RUN_CMD cp -p "${configHome}/fish/fish_variables" "${dotfilesDir}/fish/fish_variables"
+        fi
+        link_force "${dotfilesDir}/fish" "${configHome}/fish"
+      '';
+
+  home.activation.linkDotfiles = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     ${mkLinkForce}
-
-    # Fish
-    $DRY_RUN_CMD mkdir -p "${configHome}/fish/conf.d"
-
-    if [ -d "${dotfilesDir}/fish/conf.d" ]; then
-      for source in "${dotfilesDir}"/fish/conf.d/*.fish; do
-        [ -e "$source" ] || continue
-        [ "$(basename "$source")" != "20-atuin.fish" ] || continue
-        link_force "$source" "${configHome}/fish/conf.d/$(basename "$source")"
-      done
-    fi
-
-    for dir in themes functions completions; do
-      $DRY_RUN_CMD mkdir -p "${configHome}/fish/$dir"
-
-      if [ -d "${dotfilesDir}/fish/$dir" ]; then
-        for source in "${dotfilesDir}"/fish/"$dir"/*.fish; do
-          [ -e "$source" ] || continue
-          link_force "$source" "${configHome}/fish/$dir/$(basename "$source")"
-        done
-      fi
-    done
-
-    # Zoxide
-    link_force "${zoxideFishConf}" "${configHome}/fish/conf.d/30-zoxide.fish"
 
     # Ghostty
     $DRY_RUN_CMD mkdir -p "${configHome}/ghostty"

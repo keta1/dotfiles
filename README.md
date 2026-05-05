@@ -7,8 +7,7 @@ Keep secrets and private keys out of this repository.
 
 ## Managed files
 
-- `fish/config.fish` -> `~/.config/fish/config.fish`
-- `fish/conf.d/*.fish` -> `~/.config/fish/conf.d/*.fish`
+- `fish` -> `~/.config/fish`
 - `codex/config.toml` -> `~/.config/codex/config.toml` (local-only, gitignored)
 - `ghostty/config` -> `~/.config/ghostty/config`
 - `git/config` -> `~/.gitconfig`

@@ -1,0 +1,5 @@
+conf.d/*
+!conf.d/.gitkeep
+completions/*
+!completions/.gitkeep
+fish_variables

@@ -11,6 +11,7 @@
     ./config-files.nix
     ./darwin-apps.nix
     ./dotfiles.nix
+    ./fish.nix
     ./packages.nix
   ];
 
@@ -37,12 +38,14 @@
 
   programs.direnv = {
     enable = true;
+    enableFishIntegration = false;
     nix-direnv.enable = true;
   };
 
-  programs.fish = {
+  programs.ghostty = {
     enable = true;
-    shellInit = builtins.readFile ../../../fish/config.fish;
+    package = null;
+    enableFishIntegration = true;
   };
 
   programs.gpg = {
@@ -60,7 +63,9 @@
 
   services.gpg-agent = {
     enable = true;
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    enableFishIntegration = true;
+  }
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
     pinentry.package = pkgs.pinentry_mac;
   };
 }

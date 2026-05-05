@@ -1,6 +1,5 @@
 .DS_Store
 .idea
-fish/fish_variables
 git/config.local
 codex/config.toml
 ssh/*
