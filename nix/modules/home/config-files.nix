@@ -34,6 +34,9 @@ in
     # Gradle
     # https://docs.gradle.org/current/userguide/directory_layout.html#dir:gradle_user_home
     GRADLE_USER_HOME = "${dataHome}/gradle";
+
+    # Rust
+    CARGO_HOME = "${dataHome}/cargo";
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     # macOS shell sessions
     # https://apple.stackexchange.com/a/466804

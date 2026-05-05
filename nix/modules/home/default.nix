@@ -35,6 +35,11 @@
     historyFile = "${config.xdg.stateHome}/bash_history";
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.fish = {
     enable = true;
     shellInit = builtins.readFile ../../../fish/config.fish;
