@@ -1,7 +1,6 @@
 {
   homebrew = {
     enable = true;
-    enableFishIntegration = true;
 
     onActivation = {
       autoUpdate = true;
@@ -24,7 +23,6 @@
       "superset"
       "jetbrains-toolbox"
       "qq"
-      "wechat"
       "raycast"
       "shottr"
       "keta1/homebrew-tap/64gram"
@@ -35,6 +33,7 @@
       "Bitwarden" = 1352778147;
       "Bob" = 1630034110;
       "Xcode" = 497799835;
+      "WeChat" = 836500024;
     };
   };
 }

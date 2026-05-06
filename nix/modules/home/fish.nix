@@ -16,6 +16,34 @@ let
       > "$out"
   '';
 
+  homebrewPrefix =
+    if pkgs.stdenv.hostPlatform.system == "aarch64-darwin" then "/opt/homebrew" else "/usr/local";
+
+  homebrewFishInit = pkgs.writeText "10-homebrew.fish" ''
+    if status is-interactive; and test -d "${homebrewPrefix}"
+        set --global --export HOMEBREW_PREFIX "${homebrewPrefix}"
+        set --global --export HOMEBREW_CELLAR "${homebrewPrefix}/Cellar"
+        set --global --export HOMEBREW_REPOSITORY "${homebrewPrefix}"
+        fish_add_path --global --move --path "${homebrewPrefix}/bin" "${homebrewPrefix}/sbin"
+
+        if test -n "$MANPATH[1]"
+            set --global --export MANPATH "" $MANPATH
+        end
+
+        if not contains "${homebrewPrefix}/share/info" $INFOPATH
+            set --global --export INFOPATH "${homebrewPrefix}/share/info" $INFOPATH
+        end
+
+        if test -d "${homebrewPrefix}/share/fish/completions"
+            set -p fish_complete_path "${homebrewPrefix}/share/fish/completions"
+        end
+
+        if test -d "${homebrewPrefix}/share/fish/vendor_completions.d"
+            set -p fish_complete_path "${homebrewPrefix}/share/fish/vendor_completions.d"
+        end
+    end
+  '';
+
   ghosttyFishInit = pkgs.writeText "05-ghostty-integration.fish" ''
     if status is-interactive; and set -q GHOSTTY_RESOURCES_DIR
         source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
@@ -63,6 +91,9 @@ in
   xdg.configFile = {
     "fish/conf.d/00-home-manager.fish" = mkFishConf homeManagerFishInit;
     "fish/conf.d/30-zoxide.fish" = mkFishConf zoxideFishConf;
+  }
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    "fish/conf.d/10-homebrew.fish" = mkFishConf homebrewFishInit;
   }
   // lib.optionalAttrs config.programs.ghostty.enableFishIntegration {
     "fish/conf.d/05-ghostty-integration.fish" = mkFishConf ghosttyFishInit;
