@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (config.xdg)
@@ -35,9 +40,15 @@ in
     # https://docs.gradle.org/current/userguide/directory_layout.html#dir:gradle_user_home
     GRADLE_USER_HOME = "${dataHome}/gradle";
 
+    # Java
+    JENV_ROOT = "${dataHome}/jenv";
+    JAVA_HOME = "${dataHome}/jenv/versions/17";
+    JDK_HOME = "${dataHome}/jenv/versions/17";
+
     # Rust
     CARGO_HOME = "${dataHome}/cargo";
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+  }
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
     # macOS shell sessions
     # https://apple.stackexchange.com/a/466804
     SHELL_SESSIONS_DISABLE = "1";
