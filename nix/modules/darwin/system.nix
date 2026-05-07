@@ -23,6 +23,11 @@
 
   environment.shells = [ pkgs.fish ];
 
+  launchd.user.envVariables = {
+    GRADLE_USER_HOME = "${homedir}/.local/share/gradle";
+    KONAN_DATA_DIR = "${homedir}/.local/share/konan";
+  };
+
   system = {
     primaryUser = username;
     configurationRevision = self.rev or self.dirtyRev or null;

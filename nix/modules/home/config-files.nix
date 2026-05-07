@@ -40,6 +40,9 @@ in
     # https://docs.gradle.org/current/userguide/directory_layout.html#dir:gradle_user_home
     GRADLE_USER_HOME = "${dataHome}/gradle";
 
+    # Kotlin/Native
+    KONAN_DATA_DIR = "${dataHome}/konan";
+
     # Java
     JENV_ROOT = "${dataHome}/jenv";
     JAVA_HOME = "${dataHome}/jenv/versions/17";
