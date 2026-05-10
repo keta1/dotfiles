@@ -13,6 +13,10 @@ Keep secrets and private keys out of this repository.
 - `git/config` -> `~/.gitconfig`
 - `ssh/config` -> `~/.ssh/config`
 
+## Managed macOS settings
+
+- `nix/modules/darwin/macos.nix` manages Finder, Dock, and Desktop Services defaults.
+
 ## Apply changes
 
 From this repository:
