@@ -44,6 +44,12 @@ let
     end
   '';
 
+  mCliFishInit = pkgs.writeText "25-m-cli.fish" ''
+    if status is-interactive; and command -q m
+        set --global --export MCLI_PATH "${pkgs.m-cli}/bin"
+    end
+  '';
+
   ghosttyFishInit = pkgs.writeText "05-ghostty-integration.fish" ''
     if status is-interactive; and set -q GHOSTTY_RESOURCES_DIR
         source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
@@ -94,6 +100,7 @@ in
   }
   // lib.optionalAttrs pkgs.stdenv.isDarwin {
     "fish/conf.d/10-homebrew.fish" = mkFishConf homebrewFishInit;
+    "fish/conf.d/25-m-cli.fish" = mkFishConf mCliFishInit;
   }
   // lib.optionalAttrs config.programs.ghostty.enableFishIntegration {
     "fish/conf.d/05-ghostty-integration.fish" = mkFishConf ghosttyFishInit;
