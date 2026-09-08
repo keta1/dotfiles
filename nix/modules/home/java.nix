@@ -12,6 +12,7 @@ let
     "11" = pkgs.jdk11;
     "17" = pkgs.jdk17;
     "21" = pkgs.jdk21;
+    "jbr-25" = pkgs.callPackage ../../packages/jetbrains-runtime.nix { };
   };
 in
 {
