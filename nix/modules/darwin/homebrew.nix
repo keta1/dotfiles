@@ -10,23 +10,29 @@
     global.brewfile = true;
 
     taps = [
-      "keta1/homebrew-tap"
+      {
+        name = "keta1/tap";
+        trusted = true;
+      }
     ];
 
     casks = [
-      "mos"
+      "keta1/tap/64gram"
+      "charles"
+      "chatgpt"
+      "dockdoor"
+      "folo"
       "ghostty"
       "google-chrome"
-      "codex-app"
       "hyperconnect"
-      "steam"
-      "superset"
       "jetbrains-toolbox"
+      "mos"
       "qq"
       "raycast"
       "shottr"
-      "keta1/homebrew-tap/64gram"
-      "keta1/homebrew-tap/cc-switch"
+      "stats"
+      "steam"
+      "utm"
     ];
 
     masApps = {
