@@ -12,6 +12,7 @@
     ./darwin-apps.nix
     ./dotfiles.nix
     ./fish.nix
+    ./go.nix
     ./java.nix
     ./packages.nix
   ];
