@@ -32,6 +32,7 @@
       "shottr"
       "stats"
       "steam"
+      "tailscale-app"
       "utm"
     ];
 
