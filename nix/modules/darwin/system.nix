@@ -23,11 +23,6 @@
 
   environment.shells = [ pkgs.fish ];
 
-  launchd.user.envVariables = {
-    GRADLE_USER_HOME = "${homedir}/.local/share/gradle";
-    KONAN_DATA_DIR = "${homedir}/.local/share/konan";
-  };
-
   # sudo: allow Touch ID authentication for sudo prompts.
   security.pam.services.sudo_local.touchIdAuth = true;
 

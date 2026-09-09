@@ -27,6 +27,7 @@ in
         nixd
         nodejs
         pnpm
+        rustup
         scrcpy
         shellcheck
         uv
