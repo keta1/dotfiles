@@ -69,7 +69,7 @@ in
     # Swift Package Manager
     SWIFTPM_CACHE_PATH = "${cacheHome}/swiftpm";
   }
-  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     # macOS shell sessions
     # https://apple.stackexchange.com/a/466804
     SHELL_SESSIONS_DISABLE = "1";

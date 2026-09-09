@@ -98,7 +98,7 @@ in
     "fish/conf.d/00-home-manager.fish" = mkFishConf homeManagerFishInit;
     "fish/conf.d/30-zoxide.fish" = mkFishConf zoxideFishConf;
   }
-  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     "fish/conf.d/10-homebrew.fish" = mkFishConf homebrewFishInit;
     "fish/conf.d/25-m-cli.fish" = mkFishConf mCliFishInit;
   }

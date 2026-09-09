@@ -67,7 +67,7 @@
     enable = true;
     enableFishIntegration = true;
   }
-  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+  // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     pinentry.package = pkgs.pinentry_mac;
   };
 }

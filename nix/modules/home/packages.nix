@@ -2,7 +2,7 @@
 
 let
   inherit (builtins) attrValues;
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
   sim-use = pkgs.callPackage ../../packages/sim-use.nix { };
 in
 {
