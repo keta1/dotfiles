@@ -59,8 +59,8 @@ in
 
     # Java
     JENV_ROOT = "${dataHome}/jenv";
-    JAVA_HOME = "${dataHome}/jenv/versions/17";
-    JDK_HOME = "${dataHome}/jenv/versions/17";
+    JAVA_HOME = "${dataHome}/jenv/versions/21";
+    JDK_HOME = "${dataHome}/jenv/versions/21";
 
     # Rust
     CARGO_HOME = "${dataHome}/cargo";
