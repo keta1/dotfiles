@@ -53,6 +53,9 @@ in
       # Global: show all filename extensions in apps that honor the global preference.
       AppleShowAllExtensions = true;
 
+      # Windows: prefer tabs when opening documents.
+      AppleWindowTabbingMode = "always";
+
       # Menu Bar: reduce horizontal spacing between status icons.
       NSStatusItemSpacing = 6;
 

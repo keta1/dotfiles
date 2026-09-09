@@ -28,6 +28,9 @@
     KONAN_DATA_DIR = "${homedir}/.local/share/konan";
   };
 
+  # sudo: allow Touch ID authentication for sudo prompts.
+  security.pam.services.sudo_local.touchIdAuth = true;
+
   system = {
     primaryUser = username;
     configurationRevision = self.rev or self.dirtyRev or null;
