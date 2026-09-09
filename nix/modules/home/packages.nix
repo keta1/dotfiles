@@ -3,6 +3,7 @@
 let
   inherit (builtins) attrValues;
   inherit (pkgs.stdenv) isDarwin;
+  sim-use = pkgs.callPackage ../../packages/sim-use.nix { };
 in
 {
   home.packages = attrValues (
@@ -49,6 +50,7 @@ in
         m-cli
         mas
         ;
+      inherit sim-use;
     }
   );
 }
