@@ -9,8 +9,12 @@ in
     {
       inherit (pkgs)
         # Some basics
+        aria2
         curl
         fd
+        fastfetch
+        ffmpeg
+        htop
         ripgrep
         tealdeer
         vim
