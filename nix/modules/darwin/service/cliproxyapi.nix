@@ -68,17 +68,8 @@ in
     };
   };
 
-  launchd.user.agents.cliproxyapi-tailscale = {
-    environment.HOME = homedir;
-    # Run in the foreground so launchd owns the forwarding process and its lifetime.
-    command = "/Applications/Tailscale.app/Contents/MacOS/Tailscale serve --yes --http=8317 http://127.0.0.1:8317";
-
-    serviceConfig = {
-      RunAtLoad = true;
-      KeepAlive = true;
-      StandardOutPath = "${stateDir}/tailscale.log";
-      StandardErrorPath = "${stateDir}/tailscale.log";
-      Umask = 63;
-    };
-  };
+  # The macOS Tailscale CLI cannot reliably connect to its GUI from launchd.
+  # Configure forwarding once from a terminal; Tailscale persists it across restarts:
+  # TAILSCALE_BE_CLI=1 /Applications/Tailscale.app/Contents/MacOS/Tailscale serve --bg --yes --tcp=8317 tcp://127.0.0.1:8317
+  # TCP forwarding also permits direct Tailscale IP access when VPN DNS interferes.
 }

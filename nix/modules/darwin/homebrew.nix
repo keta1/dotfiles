@@ -26,6 +26,7 @@
       "google-chrome"
       "hyperconnect"
       "jetbrains-toolbox"
+      "jump-desktop-connect"
       "mos"
       "qq"
       "raycast"
@@ -33,6 +34,7 @@
       "stats"
       "steam"
       "tailscale-app"
+      "tencent-meeting"
       "utm"
     ];
 
