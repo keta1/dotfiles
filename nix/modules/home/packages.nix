@@ -35,6 +35,7 @@ in
         rustup
         scrcpy
         shellcheck
+        swiftlint
         uv
 
         # Useful Nix related tools
