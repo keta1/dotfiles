@@ -45,6 +45,9 @@ in
       # Mission Control: group windows by application.
       expose-group-apps = true;
 
+      # Mission Control: keep Spaces in their fixed order.
+      mru-spaces = false;
+
       # Dock: hide suggested and recent apps.
       show-recents = false;
     };
