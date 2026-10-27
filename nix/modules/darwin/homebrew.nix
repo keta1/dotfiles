@@ -10,23 +10,22 @@
     global.brewfile = true;
 
     taps = [
-      {
-        name = "keta1/tap";
-        trusted = true;
-      }
+      "detachhead/tap"
+      "keta1/tap"
     ];
 
     casks = [
+      "detachhead/tap/rebased"
       "keta1/tap/64gram"
       "charles"
       "chatgpt"
+      "claude"
       "dockdoor"
       "folo"
       "ghostty"
       "google-chrome"
       "hyperconnect"
       "jetbrains-toolbox"
-      "jump-desktop-connect"
       "mos"
       "qq"
       "raycast"
@@ -41,6 +40,7 @@
     masApps = {
       "Bitwarden" = 1352778147;
       "Bob" = 1630034110;
+      "TestFlight" = 899247664;
       "Xcode" = 497799835;
       "WeChat" = 836500024;
     };
