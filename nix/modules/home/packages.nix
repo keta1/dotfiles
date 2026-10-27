@@ -4,6 +4,7 @@ let
   inherit (builtins) attrValues;
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   sim-use = pkgs.callPackage ../../packages/sim-use.nix { };
+  rpcs3 = pkgs.callPackage ../../packages/rpcs3.nix { };
 in
 {
   home.packages = attrValues (
@@ -52,6 +53,9 @@ in
         mas
         ;
       inherit sim-use;
+    }
+    // lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") {
+      inherit rpcs3;
     }
   );
 }
