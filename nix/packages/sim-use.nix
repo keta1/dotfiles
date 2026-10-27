@@ -6,11 +6,11 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "sim-use";
-  version = "0.14.0";
+  version = "0.16.0";
 
   src = fetchurl {
     url = "https://github.com/lycorp-jp/sim-use/releases/download/v${version}/sim-use-v${version}.tar.gz";
-    hash = "sha256-Z+LuKackYnLehkbkZmSpPZzrys4TQJTP09B9+4K9o+Y=";
+    hash = "sha256-HKuGboPN6JvKxbzXdVSlxofIuFon7BxegiLvgmQR6QY=";
   };
 
   sourceRoot = ".";
