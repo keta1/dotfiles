@@ -27,6 +27,7 @@
       "hyperconnect"
       "jetbrains-toolbox"
       "mos"
+      "orbstack"
       "qq"
       "raycast"
       "shottr"
